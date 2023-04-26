@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://Kacper-Malek-s-workspace-k14bf6.eu-west-1.xata.sh/db/inxo",
+  "codegen": {
+    "output": "src/lib/xata.ts"
+  }
+}
