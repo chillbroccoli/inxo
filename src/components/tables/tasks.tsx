@@ -1,6 +1,6 @@
 import { createColumnHelper, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Tasks } from "~/lib/xata";
 
@@ -68,7 +68,11 @@ const columns = [
 ];
 
 export function TasksTable({ tasks }: { tasks: Tasks[] }) {
-  const [data] = useState(() => [...tasks]);
+  const [data, setData] = useState(tasks);
+
+  useEffect(() => {
+    setData(tasks);
+  }, [tasks]);
 
   const table = useReactTable({
     data,
