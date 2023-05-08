@@ -4,7 +4,8 @@ import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { createTask } from "~/lib/api";
+import { task } from "~/lib/api";
+import QUERY_KEYS from "~/lib/constants/query-keys";
 import { queryClient } from "~/lib/query-client";
 import { CreateTaskInput, createTaskSchema } from "~/lib/schemas/create-task.schema";
 
@@ -25,9 +26,9 @@ export function CreateTaskModal() {
   const { handleSubmit, reset } = methods;
 
   const { mutateAsync, isLoading } = useMutation({
-    mutationFn: createTask,
+    mutationFn: task.create,
     onSuccess: async () => {
-      await queryClient.invalidateQueries(["paginatedTasks"]);
+      await queryClient.invalidateQueries([QUERY_KEYS.ALL_TASKS]);
       setIsModalOpen(false);
       reset();
     },
