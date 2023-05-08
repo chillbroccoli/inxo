@@ -5,12 +5,13 @@ import { MainLayout } from "~/components/layouts/MainLayout";
 import { CreateTaskModal } from "~/components/modals/CreateTaskModal";
 import { TasksTable } from "~/components/tables/tasks";
 import { Title } from "~/components/ui/title";
-import { getPaginatedTasks } from "~/lib/api";
+import { task } from "~/lib/api";
+import QUERY_KEYS from "~/lib/constants/query-keys";
 
 export function TasksView() {
   const { data, isLoading } = useQuery({
-    queryKey: ["paginatedTasks"],
-    queryFn: getPaginatedTasks,
+    queryKey: [QUERY_KEYS.ALL_TASKS],
+    queryFn: task.getAll,
   });
 
   return (
