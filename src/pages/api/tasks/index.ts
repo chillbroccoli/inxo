@@ -1,6 +1,5 @@
 import { getAuth } from "@clerk/nextjs/server";
 import { NextApiHandler } from "next";
-import waait from "waait";
 
 import { getXataClient } from "~/lib/xata";
 const xata = getXataClient();
@@ -18,7 +17,6 @@ const handler: NextApiHandler = async (req, res) => {
   }
 
   if (req.method === "GET") {
-    await waait(9000);
     const records = await xata.db.tasks.getAll({
       filter: {
         userId,
