@@ -5,6 +5,7 @@ import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { task } from "~/lib/api";
+import { PRIORITY_OPTIONS, STATUS_OPTIONS } from "~/lib/constants/options";
 import QUERY_KEYS from "~/lib/constants/query-keys";
 import { queryClient } from "~/lib/query-client";
 import { CreateTaskInput, createTaskSchema } from "~/lib/schemas/create-task.schema";
@@ -28,7 +29,7 @@ export function CreateTaskModal() {
   const { mutateAsync, isLoading } = useMutation({
     mutationFn: task.create,
     onSuccess: async () => {
-      await queryClient.invalidateQueries([QUERY_KEYS.ALL_TASKS]);
+      await queryClient.invalidateQueries([QUERY_KEYS.GET_ALL_TASKS]);
       setIsModalOpen(false);
       reset();
     },
@@ -59,9 +60,11 @@ export function CreateTaskModal() {
                     <SelectValue placeholder="Select priority" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="LOW">Low</SelectItem>
-                    <SelectItem value="MEDIUM">Medium</SelectItem>
-                    <SelectItem value="HIGH">High</SelectItem>
+                    {PRIORITY_OPTIONS.map((item) => (
+                      <SelectItem value={item.value} key={item.value}>
+                        {item.label}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Input.Select>
               </div>
@@ -71,9 +74,11 @@ export function CreateTaskModal() {
                     <SelectValue placeholder="Select status" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="TODO">Todo</SelectItem>
-                    <SelectItem value="IN_PROGRESS">In Progress</SelectItem>
-                    <SelectItem value="DONE">Done</SelectItem>
+                    {STATUS_OPTIONS.map((item) => (
+                      <SelectItem value={item.value} key={item.value}>
+                        {item.label}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Input.Select>
               </div>
