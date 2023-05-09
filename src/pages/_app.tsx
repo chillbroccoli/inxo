@@ -18,13 +18,13 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>Inxo | Productivity App</title>
       </Head>
       <ClerkProvider {...pageProps}>
-        <QueryClientProvider client={queryClient}>
-          <ToastProvider swipeDirection="right">
-            <div className={raleway.className}>
+        <div className={raleway.className}>
+          <QueryClientProvider client={queryClient}>
+            <ToastProvider swipeDirection="right">
               <Component {...pageProps} />
-            </div>
-          </ToastProvider>
-        </QueryClientProvider>
+            </ToastProvider>
+          </QueryClientProvider>
+        </div>
       </ClerkProvider>
     </>
   );
