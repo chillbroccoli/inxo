@@ -10,7 +10,7 @@ import QUERY_KEYS from "~/lib/constants/query-keys";
 
 export function TasksView() {
   const { data, isLoading } = useQuery({
-    queryKey: [QUERY_KEYS.ALL_TASKS],
+    queryKey: [QUERY_KEYS.GET_ALL_TASKS],
     queryFn: task.getAll,
   });
 
