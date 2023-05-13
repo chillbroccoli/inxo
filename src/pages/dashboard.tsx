@@ -1,5 +1,5 @@
 import { TasksView } from "~/views/Tasks.view";
 
-export default function Home() {
+export default function Dashboard() {
   return <TasksView />;
 }
