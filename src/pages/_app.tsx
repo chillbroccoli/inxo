@@ -6,7 +6,7 @@ import type { AppProps } from "next/app";
 import { Raleway } from "next/font/google";
 import Head from "next/head";
 
-import { ToastProvider } from "~/components/ui/toast";
+import { Toaster } from "~/components/ui/toaster";
 import { queryClient } from "~/lib/query-client";
 
 const raleway = Raleway({ subsets: ["latin"] });
@@ -20,9 +20,8 @@ export default function App({ Component, pageProps }: AppProps) {
       <ClerkProvider {...pageProps}>
         <div className={raleway.className}>
           <QueryClientProvider client={queryClient}>
-            <ToastProvider swipeDirection="right">
-              <Component {...pageProps} />
-            </ToastProvider>
+            <Component {...pageProps} />
+            <Toaster />
           </QueryClientProvider>
         </div>
       </ClerkProvider>
